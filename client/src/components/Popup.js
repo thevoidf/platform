@@ -8,6 +8,10 @@ class Popup extends Component {
     this.titleInput.focus();
   }
 
+  onCloseClicked(e) {
+    this.props.toggle();
+  }
+
   onSubmit(e) {
     e.preventDefault();
     
@@ -46,9 +50,9 @@ class Popup extends Component {
 
   render() {
     return (
-      <div className="popup card">
+      <div className={"popup card" + (this.props.isVisible ? "" : " hide")}>
         <div className="actions">
-          <span className="action close">X</span>
+          <span className="action close" onClick={this.onCloseClicked.bind(this)}>X</span>
         </div>
         <h2 className="title">{this.props.title}</h2>
         {this.renderForm()}

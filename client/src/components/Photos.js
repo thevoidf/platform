@@ -19,7 +19,7 @@ class Photos extends Component {
       .then(resp => resp.json())
       .then(photos => {
         const photoRows = this.formatData(photos);
-        this.setState({photos: photoRows})
+        this.setState({photos: photoRows});
       });
   }
 
@@ -91,26 +91,23 @@ class Photos extends Component {
     this.togglePopup();
   }
 
-  renderPopup() {
-    if (this.state.popupVisible) {
-      return <Popup title="Popup text" form={{
-        fields: [
-          { type: 'text', title: 'title', hint: 'Title...' },
-          { type: 'file', title: 'image' },
-        ],
-        submit: 'Upload photo'
-      }} onPopupSubmited={this.onPhotoAdded.bind(this)} />
-    }
-    return '';
-  }
-
   render() {
     return (
       <div className="photos">
         <h1>{utils.getUser() + '\'s Photos'}</h1>
         <button className="btn" onClick={this.onAddPhotoClicked.bind(this)}>Add photo</button>
         {this.renderPhotos()}
-        {this.renderPopup()}
+        <Popup title="Popup text"
+          isVisible={this.state.popupVisible}
+          form={{
+            fields: [
+              { type: 'text', title: 'title', hint: 'Title...' },
+              { type: 'file', title: 'image' },
+            ],
+            submit: 'Upload photo'
+          }}
+          onPopupSubmited={this.onPhotoAdded.bind(this)}
+          toggle={this.togglePopup.bind(this)} />
       </div>
     );
   }
