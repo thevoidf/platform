@@ -1,0 +1,29 @@
+.popup {
+  position: absolute;
+  top: 50px;
+  left: 200px;
+  width: 320px;
+}
+
+.popup .title {
+  text-align: center;
+  /* padding: 4px 0 4px 10px; */
+}
+
+.popup .popup-form {
+  padding-top: 1px;
+}
+
+.popup .actions {
+  border-bottom: 1px solid gray;
+}
+
+.popup .actions .action {
+  display: inline-block;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.popup .actions .action:hover {
+  color: red;
+}

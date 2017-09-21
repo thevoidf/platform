@@ -1,0 +1,40 @@
+.header {
+  background-color: #252525;
+  margin: 0 0 20px 0;
+  padding: 2px 0;
+}
+
+.header .logo {
+  float: left;
+}
+
+.header .menu {
+  float: right;
+  position: relative;
+  top: 18px;
+}
+
+.header .logo .title {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  color: white;
+}
+
+.header .logo .image {
+  display: inline-block;
+  width: 70px;
+  padding: 3px 0 0 0;
+  animation: spin infinite 15s linear;
+}
+
+.header .menu .option {
+  margin: 0 10px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.header .menu .option:hover {
+  color: wheat;
+}

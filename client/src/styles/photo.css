@@ -1,0 +1,23 @@
+.photo {
+  width: 400px;
+  padding: 8px;
+  /* width: 384.69666666666666px; */
+  /* 31.29916233557644 */
+  width: 31.29916233557644%;
+  margin: 10px 0 10px 1.647324333451392%;
+}
+
+.photo .title {
+  padding: 10px 0 10px 10px;
+}
+
+.photo .image {
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  .photo {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
