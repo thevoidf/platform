@@ -4,6 +4,10 @@ import '../styles/popup.css';
 import { getUser } from '../utils';
 
 class Popup extends Component {
+  componentDidMount() {
+    this.titleInput.focus();
+  }
+
   onSubmit(e) {
     e.preventDefault();
     
