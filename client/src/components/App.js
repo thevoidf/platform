@@ -12,7 +12,7 @@ import PostList from './PostList';
 
 import Photos from './Photos';
 
-import { isLoggedIn } from '../utils';
+import { isLoggedIn, getUser } from '../utils';
 
 class App extends Component {
   constructor() {
@@ -40,7 +40,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="app">
           {loggedIn ?
-            <Sidebar title="James" pic={logo} items={[
+            <Sidebar title={getUser()} pic={logo} items={[
               { text: 'Posts', href: '/posts' },
               { text: 'Photos', href: '/photos' },
               { text: 'Log out', href: '/logout' }
