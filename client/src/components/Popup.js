@@ -4,10 +4,6 @@ import '../styles/popup.css';
 import { getUser } from '../utils';
 
 class Popup extends Component {
-  componentDidMount() {
-    this.titleInput.focus();
-  }
-
   onCloseClicked(e) {
     this.props.toggle();
   }
