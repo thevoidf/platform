@@ -93,4 +93,19 @@ router.post('/', upload.single('photo'), (req, res) => {
   });
 });
 
+router.get('/download/:id', (req, res, next) => {
+  const id = req.params.id;
+  models.Photo
+    .findOne({ where: { id } })
+    .then(photo => {
+      const filePath = path.join(__dirname, '../public', photo.filePath);
+      res.download(filePath, err => {
+        if (!err) return;
+        if (err && err.status !== 404) return next(err);
+        res.statusCode = 404;
+        res.send('File not found');
+      });
+    });
+});
+
 module.exports = router;

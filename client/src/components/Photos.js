@@ -64,7 +64,7 @@ class Photos extends Component {
           {this.state.photos.map((p, i) =>
             <div key={i} className="row">
               {this.state.photos[i].map((p, i) =>
-                <Photo key={i} title={p.title} photo={p.filePath} />)}
+                <Photo key={i} id={p.id} title={p.title} photo={p.filePath} />)}
             </div>
           )}
       </div>
