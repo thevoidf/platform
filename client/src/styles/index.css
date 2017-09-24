@@ -26,7 +26,10 @@ a {
   /* margin: 0 0 0 280px; */
 }
 
-.mv { margin: 0 0 0 290px;  }
+.mv {
+  padding-top: 12px;
+  margin: 0 0 0 290px;
+}
 
 .sn-row {
   width: 100%;
