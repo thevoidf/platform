@@ -31,6 +31,7 @@ class Signup extends Component {
       .then(data => {
         if (data.success) {
           utils.loginUser(data.username, data.token);
+          this.props.login();
           this.setState({ redirect: true });
         } else {
           const errors = data.errors;

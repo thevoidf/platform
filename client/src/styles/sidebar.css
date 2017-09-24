@@ -1,0 +1,33 @@
+.sidebar {
+  position: absolute;
+  width: 280px;
+  height: 100%;
+  padding: 20px 0;
+  background-color: #252525;
+}
+
+.sidebar .header {
+  text-align: center;
+}
+
+.sidebar .header .content .title {
+  color: white;
+  padding: 5px 0 0 0;
+}
+
+.sidebar .header .content .pic {
+  width: 120px;
+  animation: spin infinite 15s linear;
+}
+
+.sidebar .menu .content .item {
+  display: block;
+  padding: 20px;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+.sidebar .menu .content .item:hover {
+  background: rgba(0, 0, 0, 0.4);
+  color: wheat;
+}

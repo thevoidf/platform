@@ -7,6 +7,7 @@ import * as utils from '../utils';
 class Header extends Component {
   onLogOut(e) {
     utils.logoutUser();
+    this.props.logout();
   }
 
   renderOptions() {
