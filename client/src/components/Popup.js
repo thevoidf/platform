@@ -8,6 +8,21 @@ class Popup extends Component {
     this.props.toggle();
   }
 
+  Bg() {
+    if (this.props.dim) {
+      return <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'rgba(0, 0, 0, 0.5)',
+        zIndex: '0'
+      }}></div>;
+    }
+    return '';
+  }
+
   onSubmit(e) {
     e.preventDefault();
     
@@ -27,8 +42,15 @@ class Popup extends Component {
     });
   }
 
+  renderImage() {
+    if (this.props.image) {
+      return <img className="image" src={this.props.image.src} alt={this.props.image.alt} />
+    }
+    return '';
+  }
+
   renderForm() {
-    if (this.props.form.fields) {
+    if (this.props.form) {
       return (
         <form className="popup-form sn-row" onSubmit={this.onSubmit.bind(this)} encType="multipart/form-data">
           {this.props.form.fields.map((f, i) =>
@@ -46,12 +68,16 @@ class Popup extends Component {
 
   render() {
     return (
-      <div className={"popup card" + (this.props.isVisible ? "" : " hide")}>
-        <div className="actions">
-          <span className="action close" onClick={this.onCloseClicked.bind(this)}>X</span>
+      <div className={this.props.isVisible ? "" : " hide"}>
+        <div className="popup card" style={this.props.style ? this.props.style : {}}>
+          <div className="actions">
+            <span className="action close" onClick={this.onCloseClicked.bind(this)}>X</span>
+          </div>
+          <h2 className="title">{this.props.title}</h2>
+          {this.renderForm()}
+          {this.renderImage()}
         </div>
-        <h2 className="title">{this.props.title}</h2>
-        {this.renderForm()}
+        {this.Bg()}
       </div>
     );
   }

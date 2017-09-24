@@ -1,8 +1,9 @@
 .popup {
-  position: absolute;
+  position: fixed;
   top: 50px;
   left: 200px;
   width: 320px;
+  z-index: 100;
 }
 
 .popup .title {
@@ -12,6 +13,10 @@
 
 .popup .popup-form {
   padding-top: 1px;
+}
+
+.popup .image {
+  width: 100%;
 }
 
 .popup .actions {

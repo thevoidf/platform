@@ -1,8 +1,6 @@
 .photo {
   width: 400px;
   padding: 8px;
-  /* width: 384.69666666666666px; */
-  /* 31.29916233557644 */
   width: 31.29916233557644%;
   margin: 10px 0 10px 1.647324333451392%;
 }
@@ -13,6 +11,11 @@
 
 .photo .image {
   width: 100%;
+  margin-bottom: 5px;
+}
+
+.photo .btn.open {
+  margin-left: 6px;
 }
 
 @media (max-width: 800px) {

@@ -10,7 +10,12 @@ class Photos extends Component {
     super();
     this.state = {
       photos: [],
-      popupVisible: false
+      uploadPopup: false,
+      imagePopup: {
+        src: '',
+        isVisible: false,
+        alt: ''
+      }
     };
   }
 
@@ -64,31 +69,47 @@ class Photos extends Component {
           {this.state.photos.map((p, i) =>
             <div key={i} className="row">
               {this.state.photos[i].map((p, i) =>
-                <Photo key={i} id={p.id} title={p.title} photo={p.filePath} />)}
+                <Photo key={i} id={p.id} title={p.title} photo={p.filePath} open={this.onImageOpen.bind(this)} />)}
             </div>
           )}
       </div>
-      );  
+      );
     }
     return '';
   }
 
-  togglePopup() {
-    const popupVisible = this.state.popupVisible;
+  toggleUploadPopup() {
+    const uploadPopup = this.state.uploadPopup;
     this.setState({
-      popupVisible: !popupVisible
+      uploadPopup: !uploadPopup
+    });
+  }
+
+  toggleImagePopup() {
+    const imagePopup = this.state.imagePopup;
+    imagePopup.isVisible = !imagePopup.isVisible;
+    this.setState({
+      imagePopup: imagePopup
     });
   }
 
   onAddPhotoClicked(e) {
-    this.togglePopup();
+    this.toggleUploadPopup();
   }
 
   onPhotoAdded(newPhoto) {
     const photos = this.state.photos;
     this.addPhoto(photos, newPhoto);
     this.setState({photos});
-    this.togglePopup();
+    this.toggleUploadPopup();
+  }
+
+  onImageOpen(image) {
+    const imagePopup = this.state.imagePopup;
+    this.toggleImagePopup();
+    imagePopup.src = image.src;
+    imagePopup.alt = image.title;
+    this.setState({imagePopup});
   }
 
   render() {
@@ -98,7 +119,7 @@ class Photos extends Component {
         <button className="btn" onClick={this.onAddPhotoClicked.bind(this)}>Add photo</button>
         {this.renderPhotos()}
         <Popup title="Popup text"
-          isVisible={this.state.popupVisible}
+          isVisible={this.state.uploadPopup}
           form={{
             fields: [
               { type: 'text', title: 'title', hint: 'Title...' },
@@ -107,7 +128,20 @@ class Photos extends Component {
             submit: 'Upload photo'
           }}
           onPopupSubmited={this.onPhotoAdded.bind(this)}
-          toggle={this.togglePopup.bind(this)} />
+          toggle={this.toggleUploadPopup.bind(this)} />
+        <Popup
+          isVisible={this.state.imagePopup.isVisible}
+          dim={true}
+          image={{
+            src: this.state.imagePopup.src,
+            alt: this.state.imagePopup.alt
+          }}
+          style={{
+            width: '820px',
+            left: '50%',
+            marginLeft: '-410px',
+          }}
+          toggle={this.toggleImagePopup.bind(this)} />
       </div>
     );
   }
