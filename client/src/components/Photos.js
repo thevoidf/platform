@@ -119,6 +119,7 @@ class Photos extends Component {
         <button className="btn" onClick={this.onAddPhotoClicked.bind(this)}>Add photo</button>
         {this.renderPhotos()}
         <Popup title="Popup text"
+          x={200} y={40}
           isVisible={this.state.uploadPopup}
           form={{
             fields: [
@@ -130,6 +131,7 @@ class Photos extends Component {
           onPopupSubmited={this.onPhotoAdded.bind(this)}
           toggle={this.toggleUploadPopup.bind(this)} />
         <Popup
+          x={100} y={20}
           isVisible={this.state.imagePopup.isVisible}
           dim={true}
           image={{
@@ -137,9 +139,7 @@ class Photos extends Component {
             alt: this.state.imagePopup.alt
           }}
           style={{
-            width: '820px',
-            left: '50%',
-            marginLeft: '-410px',
+            width: '820px'
           }}
           toggle={this.toggleImagePopup.bind(this)} />
       </div>

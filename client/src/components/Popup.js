@@ -4,6 +4,55 @@ import '../styles/popup.css';
 import { getUser } from '../utils';
 
 class Popup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      x: this.props.x || 0,
+      y: this.props.y || 0,
+      dragging: false
+    };
+  }
+
+  componentDidUpdate(props, state) {
+    if (this.state.dragging && !state.dragging) {
+      document.addEventListener('mousemove', this.onMouseMove.bind(this))
+      document.addEventListener('mouseup', this.onMouseUp.bind(this))
+    } else if (!this.state.dragging && state.dragging) {
+      document.removeEventListener('mousemove', this.onMouseMove.bind(this))
+      document.removeEventListener('mouseup', this.onMouseUp.bind(this))
+    }
+  }
+
+  onMouseDown(e) {
+    if (e.button !== 0) return;
+    const pos = e.target.getBoundingClientRect();
+    this.setState({
+      dragging: true,
+      rel: {
+        x: e.pageX - pos.left,
+        y: e.pageY - pos.top
+      }
+    });
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  onMouseUp(e) {
+    this.setState({dragging: false});
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  onMouseMove(e) {
+    if (!this.state.dragging) return;
+    this.setState({
+      x: e.pageX - this.state.rel.x,
+      y: e.pageY - this.state.rel.y
+    })
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
   onCloseClicked(e) {
     this.props.toggle();
   }
@@ -69,11 +118,14 @@ class Popup extends Component {
   render() {
     return (
       <div className={this.props.isVisible ? "" : " hide"}>
-        <div className="popup card" style={this.props.style ? this.props.style : {}}>
-          <div className="actions">
+        <div className="popup card" style={Object.assign({
+          left: this.state.x + 'px',
+          top: this.state.y + 'px'
+        }, this.props.style ? this.props.style: {})}>
+          <div className="actions" onMouseDown={this.onMouseDown.bind(this)}>
             <span className="action close" onClick={this.onCloseClicked.bind(this)}>X</span>
           </div>
-          <h2 className="title">{this.props.title}</h2>
+          {this.props.title ? <h2 className="title">{this.props.title}</h2> : ''}
           {this.renderForm()}
           {this.renderImage()}
         </div>
