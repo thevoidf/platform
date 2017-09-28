@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const usersDir = 'public/static/media/users';
     const userDir = path.join(usersDir, req.body.username);
-    
+
     fs.exists(usersDir, (exists) => {
       if (!exists) {
         fs.mkdir(usersDir, (err) => {
@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
             fs.mkdir(userDir, (err) => {
               if (err) throw err;
               cb(null, userDir);
-            });    
+            });
           } else {
             cb(null, userDir);
           }
@@ -48,7 +48,7 @@ const upload = multer({ storage });
 const models = require('../models');
 
 router.get('/', (req, res) => {
-  models.Photo.findAll().then(photos => {
+  models.Media.findAll().then(photos => {
     res.json(photos);
   });
 });
@@ -74,7 +74,7 @@ router.post('/', upload.single('photo'), (req, res) => {
   models.User.findOne({
     where: { username: req.body.username }
   }).then(user => {
-    models.Photo.create({
+    models.Media.create({
       title,
       description,
       filePath,
@@ -89,13 +89,13 @@ router.post('/', upload.single('photo'), (req, res) => {
           filePath
         }
       });
-    });  
+    });
   });
 });
 
 router.get('/download/:id', (req, res, next) => {
   const id = req.params.id;
-  models.Photo
+  models.Media
     .findOne({ where: { id } })
     .then(photo => {
       const filePath = path.join(__dirname, '../public', photo.filePath);

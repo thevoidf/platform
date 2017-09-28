@@ -39,7 +39,7 @@ class Photos extends Component {
       } else {
         col.push(c);
         return r;
-      }        
+      }
     }, []);
   }
 
@@ -47,7 +47,7 @@ class Photos extends Component {
     if (photos.length === 0) {
       const row = [];
       photos.push(row);
-      row.push(photo);      
+      row.push(photo);
     } else {
       const latestIndex = photos.length - 1;
       const latestRow = photos[latestIndex];
