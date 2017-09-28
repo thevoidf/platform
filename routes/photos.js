@@ -55,14 +55,13 @@ router.get('/', (req, res) => {
 
 router.get('/:username', (req, res) => {
   const username = req.params.username;
-  console.log('username', username);
 
   models.User.findOne({
     where: { username }
   }).then(user => {
-    user.getPhotos().then(photos => {
-      res.json(photos);
-    });
+    models.Media.findAll({
+      where: { fileType: { $ilike: 'image/' + '%' } }
+    }).then(photos => res.json(photos));
   });
 });
 
@@ -70,6 +69,7 @@ router.post('/', upload.single('photo'), (req, res) => {
   const title = req.body.title;
   const description = req.body.description || 'no desc';
   const filePath = req.file.path.substring(7);
+  const fileType = req.file.mimetype;
 
   models.User.findOne({
     where: { username: req.body.username }
@@ -78,6 +78,7 @@ router.post('/', upload.single('photo'), (req, res) => {
       title,
       description,
       filePath,
+      fileType,
       UserId: user.id
     }).then(photo => {
       res.json({
