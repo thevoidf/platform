@@ -78,15 +78,18 @@ class Popup extends Component {
     const formData = new FormData();
     formData.append('username', getUser());
     formData.append('title', this.titleInput.value);
-    formData.append('photo', this.imageInput.files[0]);
 
-    fetch('/api/photos', {
+    const type = this.props.form.fields.filter(f => f.type.toLowerCase() === 'file')[0].title;
+    console.log('file name: ' + type);
+    formData.append(type, this[type + 'Input'].files[0]);
+
+    fetch('/api/' + this.props.form.route, {
       method: 'POST',
       body: formData
     }).then(resp => resp.json())
       .then(data => {
         this.titleInput.value = '';
-        this.imageInput.value = '';
+        this[type + 'Input'].value = '';
         this.props.onPopupSubmited(data.photo);
     });
   }

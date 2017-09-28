@@ -1,22 +1,23 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const router = express.Router();
+const path = require('path');
+const fs = require('fs');
+const models = require('../models');
 const multer = require('multer');
 const mkdirp = require('mkdirp');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const usersDir = 'public/static/media/users';
     const userDir = path.join(usersDir, req.body.username);
-    const photosDir = path.join(userDir, 'photos');
+    const musicDir = path.join(userDir, 'music');
 
-    fs.exists(photosDir, exists => {
+    fs.exists(musicDir, exists => {
       if (exists) {
-        cb(null, photosDir);
+        cb(null, musicDir);
       } else {
-        mkdirp(photosDir, err => {
+        mkdirp(musicDir, err => {
           if (err) throw err;
-          cb(null, photosDir);
+          cb(null, musicDir);
         });
       }
     });
@@ -29,12 +30,11 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage });
-const models = require('../models');
 
 router.get('/', (req, res) => {
-  models.Media.findAll().then(photos => {
-    res.json(photos);
-  });
+  models.Media.findAll({
+    where: { fileType: { $ilike: 'audio/' + '%' } }
+  }).then(music => res.json(music));
 });
 
 router.get('/:username', (req, res) => {
@@ -46,15 +46,15 @@ router.get('/:username', (req, res) => {
     models.Media.findAll({
       where: {
         UserId: user.id,
-        fileType: { $ilike: 'image/' + '%' }
+        fileType: { $ilike: 'audio/' + '%' }
       }
-    }).then(photos => res.json(photos));
+    }).then(music => res.json(music));
   });
 });
 
-router.post('/', upload.single('photo'), (req, res) => {
-  const title = req.body.title;
+router.post('/', upload.single('music'), (req, res) => {
   const description = req.body.description || 'no desc';
+  const title = req.body.title;
   const filePath = req.file.path.substring(7);
   const fileType = req.file.mimetype;
 
@@ -64,36 +64,22 @@ router.post('/', upload.single('photo'), (req, res) => {
     models.Media.create({
       title,
       description,
-      filePath,
       fileType,
+      filePath,
       UserId: user.id
-    }).then(photo => {
+    }).then(music => {
       res.json({
         success: true,
-        message: 'photo uploaded',
-        photo: {
+        message: 'music uploaded',
+        music: {
           title,
           description,
+          fileType,
           filePath
         }
       });
     });
   });
-});
-
-router.get('/download/:id', (req, res, next) => {
-  const id = req.params.id;
-  models.Media
-    .findOne({ where: { id } })
-    .then(photo => {
-      const filePath = path.join(__dirname, '../public', photo.filePath);
-      res.download(filePath, err => {
-        if (!err) return;
-        if (err && err.status !== 404) return next(err);
-        res.statusCode = 404;
-        res.send('File not found');
-      });
-    });
 });
 
 module.exports = router;

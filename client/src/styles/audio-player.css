@@ -1,0 +1,15 @@
+.audio-player {
+  max-width: 600px;
+  padding: 10px;
+  margin: 0 auto 5px auto;
+}
+
+.audio-player .title {
+  text-align: center;
+  padding: 5px 0 10px 0;
+}
+
+.audio-player audio {
+  width: 100%;
+  background: red;
+}

@@ -124,9 +124,10 @@ class Photos extends Component {
           form={{
             fields: [
               { type: 'text', title: 'title', hint: 'Title...' },
-              { type: 'file', title: 'image' },
+              { type: 'file', title: 'photo' },
             ],
-            submit: 'Upload photo'
+            submit: 'Upload photo',
+            route: 'photos'
           }}
           onPopupSubmited={this.onPhotoAdded.bind(this)}
           toggle={this.toggleUploadPopup.bind(this)} />

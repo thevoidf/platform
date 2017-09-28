@@ -9,8 +9,8 @@ import Sidebar from './Sidebar';
 import Login from './Login';
 import Signup from './Signup';
 import PostList from './PostList';
-
 import Photos from './Photos';
+import Music from './Music';
 
 import { isLoggedIn, getUser } from '../utils';
 
@@ -43,6 +43,7 @@ class App extends Component {
             <Sidebar title={getUser()} pic={logo} items={[
               { text: 'Posts', href: '/posts' },
               { text: 'Photos', href: '/photos' },
+              { text: 'Play Music', href: '/music' },
               { text: 'Log out', href: '/logout' }
             ]} logout={this.logout.bind(this)} /> :
             <Header title="Platform" logo={logo} logout={this.logout.bind(this)} />}
@@ -61,6 +62,13 @@ class App extends Component {
               <Route path="/photos" render={() => (
                 loggedIn ? (
                   <Photos />
+                ) : (
+                  <Redirect to="/" />
+                )
+              )} />
+              <Route path="/music" render={() => (
+                loggedIn ? (
+                  <Music />
                 ) : (
                   <Redirect to="/" />
                 )
