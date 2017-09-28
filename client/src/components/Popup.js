@@ -74,7 +74,7 @@ class Popup extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    
+
     const formData = new FormData();
     formData.append('username', getUser());
     formData.append('title', this.titleInput.value);
