@@ -118,7 +118,7 @@ class Photos extends Component {
         <h1>{utils.getUser() + '\'s Photos'}</h1>
         <button className="btn" onClick={this.onAddPhotoClicked.bind(this)}>Add photo</button>
         {this.renderPhotos()}
-        <Popup title="Popup text"
+        <Popup title="Upload photo"
           x={200} y={40}
           isVisible={this.state.uploadPopup}
           form={{
