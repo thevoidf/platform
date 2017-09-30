@@ -26,6 +26,10 @@ class Music extends Component {
   }
 
   onMusicAdded(newMusic) {
+    const music = this.state.music;
+    music.push(newMusic);
+    this.setState({music});
+    this.toggleUploadPopup();
   }
 
   toggleUploadPopup() {

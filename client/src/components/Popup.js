@@ -80,7 +80,6 @@ class Popup extends Component {
     formData.append('title', this.titleInput.value);
 
     const type = this.props.form.fields.filter(f => f.type.toLowerCase() === 'file')[0].title;
-    console.log('file name: ' + type);
     formData.append(type, this[type + 'Input'].files[0]);
 
     fetch('/api/' + this.props.form.route, {
@@ -90,7 +89,7 @@ class Popup extends Component {
       .then(data => {
         this.titleInput.value = '';
         this[type + 'Input'].value = '';
-        this.props.onPopupSubmited(data.photo);
+        this.props.onPopupSubmited(data[type]);
     });
   }
 
