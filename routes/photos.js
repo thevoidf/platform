@@ -48,7 +48,9 @@ router.get('/:username', (req, res) => {
         UserId: user.id,
         fileType: { $ilike: 'image/' + '%' }
       }
-    }).then(photos => res.json(photos));
+    }).then(photos => {
+      if (photos) res.json(photos)
+    });
   });
 });
 

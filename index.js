@@ -38,7 +38,7 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || 3001;
 
 // {force: true}
-models.sequelize.sync({force: true}).then(() => {
+models.sequelize.sync().then(() => {
 	app.listen(port, () => {
 		console.log('platform is running on: ' + port);
 	});
