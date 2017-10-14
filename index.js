@@ -12,6 +12,7 @@ const users = require('./routes/users');
 const posts = require('./routes/posts');
 const photos = require('./routes/photos');
 const music = require('./routes/music');
+const profile = require('./routes/profile');
 
 // middlewares
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,6 +26,7 @@ app.use('/api/users', users);
 app.use('/api/posts', posts);
 app.use('/api/photos', photos);
 app.use('/api/music', music);
+app.use('/api/profile', profile);
 
 // test route
 app.get('/api/test', (req, res) => {

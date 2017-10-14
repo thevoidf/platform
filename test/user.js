@@ -38,4 +38,3 @@ describe('User', () => {
 		assert.equal(typeof models.User, 'function');
 	});
 });
-
