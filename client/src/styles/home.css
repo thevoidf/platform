@@ -1,0 +1,54 @@
+.home .banner {
+  background-color: deepskyblue;
+  padding: 80px 140px;
+}
+
+.home .banner .text {
+  float: left;
+  width: 50%;
+  color: white;
+}
+
+.home .banner .text .title {
+  font-size: 42px;
+}
+
+.home .banner .text .sub {
+  padding: 10px 0 0 0;
+  font-size: 28px;
+}
+
+.home .banner .forms {
+  float: right;
+  width: 50%;
+}
+
+@media (max-width: 750px) {
+  .home .banner {
+    padding: 60px 40px;
+  }
+  .home .banner .text {
+    float: none;
+    width: 100%;
+    padding: 0 0 40px 0;
+    text-align: center;
+  }
+  .home .banner .forms {
+    float: none;
+    width: 100%;
+  }
+}
+
+.home .main .desc {
+  margin: 120px 0;
+  text-align: center;
+}
+
+.home .main .desc .title {
+  font-size: 36px;
+}
+
+.home .main .desc .sub {
+  padding: 0 0 10px 0;
+  font-size: 18px;
+}

@@ -30,7 +30,7 @@ class Header extends Component {
           <Link className="option" to="/signup">Sign up</Link>
           <Link className="option" to="/login">Log in</Link>
         </div>
-      );  
+      );
     }
   }
 

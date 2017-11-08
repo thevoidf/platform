@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom';
 import * as utils from '../utils';
 
 class Signup extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       errors: [],
       redirect: false
@@ -14,7 +14,7 @@ class Signup extends Component {
 
   onSignup(e) {
     e.preventDefault();
-    
+
     const data = {
       username: this.usernameInput.value,
       email: this.emailInput.value,
@@ -46,8 +46,8 @@ class Signup extends Component {
     }
 
     return (
-      <form className="signup sn-row card w-400" onSubmit={this.onSignup.bind(this)}>
-        <h2 className="title">Login to you'r account</h2>
+      <form className={"signup sn-row card w-380 " + (this.props.classes ? this.props.classes.map(cls => cls + ' ') : '')} onSubmit={this.onSignup.bind(this)}>
+        <h2 className="title">Create new account</h2>
         <div className="errors">
           {this.state.errors.map((err, i) => <p key={i}>{err}</p>)}
         </div>

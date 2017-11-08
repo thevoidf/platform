@@ -22,7 +22,7 @@ a {
   margin: 0 auto;
 }
 
-.app > .wrapper > .content {
+.app > .content {
   /* margin: 0 0 0 280px; */
 }
 
@@ -34,7 +34,7 @@ a {
 .sn-row {
   width: 100%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 16px 11px;
 }
 
 .sn-row .title {
@@ -47,7 +47,7 @@ a {
 .sn-row textarea {
   width: 100%;
   margin: 5px 0;
-  padding: 4px;
+  padding: 6px;
   font-size: 16px;
 }
 
@@ -96,5 +96,9 @@ a {
   to { transform: rotate(360deg); }
 }
 
+.mart { margin-top: 20px; }
 .w-400 { width: 400px; }
+.w-380 { width: 380px; }
+.w-340 { width: 340px; }
+.w-200 { width: 200px; }
 .hide { display: none; }

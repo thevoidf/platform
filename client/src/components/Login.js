@@ -15,7 +15,7 @@ class Login extends Component {
 
   onLogin(e) {
     e.preventDefault();
-    
+
     const data = {
       email: this.emailInput.value,
       password: this.passwordInput.value
@@ -46,7 +46,7 @@ class Login extends Component {
     }
 
     return (
-      <form className="login sn-row card w-400" onSubmit={this.onLogin.bind(this)}>
+      <form className={"login sn-row card w-400 " + (this.props.classes ? this.props.classes.map(cls => cls + ' ') : '')} onSubmit={this.onLogin.bind(this)}>
         <h2 className="title">Login to you'r account</h2>
         <div className="errors">
           {this.state.errors.map((err, i) => <p key={i}>{err}</p>)}

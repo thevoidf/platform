@@ -19,7 +19,7 @@ class Sidebar extends Component {
         <header className="header">
           <div className="content">
             <img className="pic" src={this.props.pic} alt="header pic" />
-            <h2 className="title">{this.props.title}</h2>
+            <h2 className="title"><Link to="/profile">{this.props.title}</Link></h2>
           </div>
         </header>
         <div className="menu">
